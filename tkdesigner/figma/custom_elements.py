@@ -20,7 +20,7 @@ class Button(Rectangle):
             image=self.button_image_{self.id_},
             borderwidth=0,
             highlightthickness=0,
-            command=args[{self.id_}],
+            command=lambda: args[{self.id_}](),
             relief="flat"
         )
         self.button_{self.id_}.place(
