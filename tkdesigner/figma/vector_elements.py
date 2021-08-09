@@ -73,13 +73,13 @@ class Rectangle(Vector):
 
     def to_code(self):
         return f"""
-canvas.create_rectangle(
-    {self.x},
-    {self.y},
-    {self.x + self.width},
-    {self.y + self.height},
-    fill="{self.fill_color}",
-    outline="")
+        self.canvas.create_rectangle(
+            {self.x},
+            {self.y},
+            {self.x + self.width},
+            {self.y + self.height},
+            fill="{self.fill_color}",
+            outline="")
 """
 
 
@@ -91,11 +91,11 @@ class UnknownElement(Vector):
 
     def to_code(self):
         return f"""
-canvas.create_rectangle(
-    {self.x},
-    {self.y},
-    {self.x + self.width},
-    {self.y + self.height},
-    fill="#000000",
-    outline="")
+        self.canvas.create_rectangle(
+            {self.x},
+            {self.y},
+            {self.x + self.width},
+            {self.y + self.height},
+            fill="#000000",
+            outline="")
 """

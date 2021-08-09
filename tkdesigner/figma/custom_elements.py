@@ -14,21 +14,21 @@ class Button(Rectangle):
 
     def to_code(self):
         return f"""
-button_image_{self.id_} = PhotoImage(
-    file=relative_to_assets("{self.image_path}"))
-button_{self.id_} = Button(
-    image=button_image_{self.id_},
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_{self.id_} clicked"),
-    relief="flat"
-)
-button_{self.id_}.place(
-    x={self.x},
-    y={self.y},
-    width={self.width},
-    height={self.height}
-)
+        self.button_image_{self.id_} = PhotoImage(
+            file=relative_to_assets("{self.image_path}"))
+        self.button_{self.id_} = Button(
+            image=self.button_image_{self.id_},
+            borderwidth=0,
+            highlightthickness=0,
+            command=args[{self.id_}],
+            relief="flat"
+        )
+        self.button_{self.id_}.place(
+            x={self.x},
+            y={self.y},
+            width={self.width},
+            height={self.height}
+        )
 """
 
 
@@ -84,14 +84,14 @@ class Text(Vector):
 
     def to_code(self):
         return f"""
-canvas.create_text(
-    {self.x},
-    {self.y},
-    anchor="nw",
-    text="{self.text}",
-    fill="{self.text_color}",
-    font=("{self.font}", {int(self.font_size)} * -1)
-)
+        self.canvas.create_text(
+            {self.x},
+            {self.y},
+            anchor="nw",
+            text="{self.text}",
+            fill="{self.text_color}",
+            font=("{self.font}", {int(self.font_size)} * -1)
+        )
 """
 
 
@@ -110,13 +110,13 @@ class Image(Vector):
 
     def to_code(self):
         return f"""
-image_image_{self.id_} = PhotoImage(
-    file=relative_to_assets("{self.image_path}"))
-image_{self.id_} = canvas.create_image(
-    {self.x},
-    {self.y},
-    image=image_image_{self.id_}
-)
+        self.image_image_{self.id_} = PhotoImage(
+            file=relative_to_assets("{self.image_path}"))
+        self.image_{self.id_} = self.canvas.create_image(
+            {self.x},
+            {self.y},
+            image=self.image_image_{self.id_}
+        )
 """
 
 
@@ -148,22 +148,22 @@ class TextEntry(Vector):
 
     def to_code(self):
         return f"""
-entry_image_{self.id_} = PhotoImage(
-    file=relative_to_assets("{self.image_path}"))
-entry_bg_{self.id_} = canvas.create_image(
-    {self.x},
-    {self.y},
-    image=entry_image_{self.id_}
-)
-entry_{self.id_} = {self.entry_type}(
-    bd=0,
-    bg="{self.bg_color}",
-    highlightthickness=0
-)
-entry_{self.id_}.place(
-    x={self.entry_x},
-    y={self.entry_y},
-    width={self.entry_width},
-    height={self.entry_height}
-)
+        self.entry_image_{self.id_} = PhotoImage(
+            file=relative_to_assets("{self.image_path}"))
+        self.entry_bg_{self.id_} = self.canvas.create_image(
+            {self.x},
+            {self.y},
+            image=self.entry_image_{self.id_}
+        )
+        self.entry_{self.id_} = {self.entry_type}(
+            bd=0,
+            bg="{self.bg_color}",
+            highlightthickness=0
+        )
+        self.entry_{self.id_}.place(
+            x={self.entry_x},
+            y={self.entry_y},
+            width={self.entry_width},
+            height={self.entry_height}
+        )
 """

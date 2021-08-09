@@ -32,6 +32,8 @@ class Frame(Node):
             if Node(child).visible
         ]
 
+        self.buttonCount = self.counter[Button]
+
     def create_element(self, element):
         element_name = element["name"].strip()
         element_type = element["type"].strip()

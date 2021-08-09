@@ -1,12 +1,14 @@
 import tkdesigner.figma.endpoints as endpoints
 from tkdesigner.figma.frame import Frame
 
-from tkdesigner.template import TEMPLATE
+from tkdesigner.template import GUI_TEMPLATE, APP_TEMPLATE
+from jinja2 import Template
 
 from pathlib import Path
 
 
-CODE_FILE_NAME = "gui.py"
+GUI_FILE_NAME = "gui.py"
+APP_FILE_NAME = "app.py"
 
 
 class Designer:
@@ -21,10 +23,17 @@ class Designer:
         window_data = self.file_data["document"]["children"][0]["children"][0]
 
         frame = Frame(window_data, self.figma_file, self.output_path)
-        return frame.to_code(TEMPLATE)
+        self.buttonCount = frame.buttonCount
+        return frame.to_code(GUI_TEMPLATE)
 
     def design(self):
         """Write code and assets to the specified directories.
         """
         code = self.to_code()
-        self.output_path.joinpath(CODE_FILE_NAME).write_text(code)
+        self.output_path.joinpath(GUI_FILE_NAME).write_text(code)
+
+        """Write app.py code based on number of buttons
+        """
+        app_template = Template(APP_TEMPLATE)
+        app_code = app_template.render(buttonCount = self.buttonCount)
+        self.output_path.joinpath(APP_FILE_NAME).write_text(app_code)
